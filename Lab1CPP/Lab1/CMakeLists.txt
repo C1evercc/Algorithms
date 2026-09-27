@@ -1,24 +1,22 @@
-set(LIBRARY_CPP_TEMPLATE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../LibraryCPPTemplate")
-
 add_executable(even_difference even_difference.cpp)
 add_executable(resistance resistance.cpp)
 
 target_include_directories(
     even_difference
     PRIVATE
-    "${LIBRARY_CPP_TEMPLATE_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../LibraryCPPTemplate"
 )
 
 target_include_directories(
     resistance
     PRIVATE
-    "${LIBRARY_CPP_TEMPLATE_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../LibraryCPPTemplate"
 )
 
 add_test(
     NAME TestEvenDifference1
     COMMAND even_difference
-            ${CMAKE_CURRENT_SOURCE_DIR}/data/even_1.txt
+            "${CMAKE_CURRENT_SOURCE_DIR}/data/even_1.txt"
 )
 
 set_tests_properties(
@@ -30,7 +28,7 @@ set_tests_properties(
 add_test(
     NAME TestEvenDifference2
     COMMAND even_difference
-            ${CMAKE_CURRENT_SOURCE_DIR}/data/even_2.txt
+            "${CMAKE_CURRENT_SOURCE_DIR}/data/even_2.txt"
 )
 
 set_tests_properties(
@@ -42,7 +40,7 @@ set_tests_properties(
 add_test(
     NAME TestResistance1
     COMMAND resistance
-            ${CMAKE_CURRENT_SOURCE_DIR}/data/resistance_1.txt
+            "${CMAKE_CURRENT_SOURCE_DIR}/data/resistance_1.txt"
 )
 
 set_tests_properties(
@@ -54,7 +52,7 @@ set_tests_properties(
 add_test(
     NAME TestResistance2
     COMMAND resistance
-            ${CMAKE_CURRENT_SOURCE_DIR}/data/resistance_2.txt
+            "${CMAKE_CURRENT_SOURCE_DIR}/data/resistance_2.txt"
 )
 
 set_tests_properties(
@@ -66,7 +64,7 @@ set_tests_properties(
 add_test(
     NAME TestEvenDifference3
     COMMAND even_difference
-            ${CMAKE_CURRENT_SOURCE_DIR}/data/even_3.txt
+            "${CMAKE_CURRENT_SOURCE_DIR}/data/even_3.txt"
 )
 
 set_tests_properties(
