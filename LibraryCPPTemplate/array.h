@@ -2,45 +2,44 @@
 #define ARRAY_TEMPLATE_H
 
 #include <cstddef>
+#include <utility>
 
-template <typename Data> class Array
+template <typename Data>
+class Array
 {
 public:
     // create array
     explicit Array(size_t size)
+        : length(size), items(new Data[size])
     {
-        length = size;
-        items = new Data[length];
     }
 
     // copy constructor
     Array(const Array &a)
+        : length(a.length), items(new Data[a.length])
     {
-        length = a.length;
-        items = new Data[length];
-
-        for (size_t i = 0; i < length; i++)
+        try
         {
-            items[i] = a.items[i];
+            for (size_t i = 0; i < length; i++)
+            {
+                items[i] = a.items[i];
+            }
+        }
+        catch (...)
+        {
+            delete[] items;
+            throw;
         }
     }
 
     // assignment operator
     Array &operator=(const Array &a)
     {
-        if (this == &a)
+        if (this != &a)
         {
-            return *this;
-        }
-
-        delete[] items;
-
-        length = a.length;
-        items = new Data[length];
-
-        for (size_t i = 0; i < length; i++)
-        {
-            items[i] = a.items[i];
+            Array copy(a);
+            std::swap(length, copy.length);
+            std::swap(items, copy.items);
         }
 
         return *this;
