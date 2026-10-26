@@ -7,9 +7,12 @@
 
 #include "stack.h"
 
-int take(Stack<int> &stack)
+typedef int Data;
+
+// Returns and removes the top element
+Data take(Stack<Data> &stack)
 {
-    int value = stack.get();
+    Data value = stack.get();
     stack.pop();
 
     return value;
@@ -33,7 +36,7 @@ int main(int argc, char **argv)
 
     try
     {
-        Stack<int> stack;
+        Stack<Data> stack;
         std::string command;
 
         while (input >> command)
@@ -53,25 +56,25 @@ int main(int argc, char **argv)
             }
             else if (command == "swap")
             {
-                int top = take(stack);
-                int below = take(stack);
+                Data top = take(stack);
+                Data below = take(stack);
 
                 stack.push(top);
                 stack.push(below);
             }
             else if (command == "over")
             {
-                int top = take(stack);
-                int below = stack.get();
+                Data top = take(stack);
+                Data below = stack.get();
 
                 stack.push(top);
                 stack.push(below);
             }
             else if (command == "rot")
             {
-                int top = take(stack);
-                int middle = take(stack);
-                int bottom = take(stack);
+                Data top = take(stack);
+                Data middle = take(stack);
+                Data bottom = take(stack);
 
                 stack.push(middle);
                 stack.push(top);
@@ -116,13 +119,13 @@ int main(int argc, char **argv)
                     result = left % right;
                 }
 
-                if (result < std::numeric_limits<int>::min() ||
-                    result > std::numeric_limits<int>::max())
+                if (result < std::numeric_limits<Data>::min() ||
+                    result > std::numeric_limits<Data>::max())
                 {
                     throw std::runtime_error("Integer overflow");
                 }
 
-                stack.push(static_cast<int>(result));
+                stack.push(static_cast<Data>(result));
             }
             else
             {
