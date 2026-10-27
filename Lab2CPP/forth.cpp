@@ -8,9 +8,9 @@
 #include "stack.h"
 
 typedef int Data;
+typedef Stack<Data> ForthStack;
 
-// Returns and removes the top element
-Data take(Stack<Data> &stack)
+Data take(ForthStack& stack)
 {
     Data value = stack.get();
     stack.pop();
@@ -18,7 +18,7 @@ Data take(Stack<Data> &stack)
     return value;
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     if (argc != 2)
     {
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 
     try
     {
-        Stack<Data> stack;
+        ForthStack stack;
         std::string command;
 
         while (input >> command)
@@ -85,8 +85,8 @@ int main(int argc, char **argv)
                 std::cout << take(stack) << '\n';
             }
             else if (command == "+" || command == "-" ||
-                     command == "*" || command == "/" ||
-                     command == "%")
+                command == "*" || command == "/" ||
+                command == "%")
             {
                 long long right = take(stack);
                 long long left = take(stack);
@@ -139,7 +139,7 @@ int main(int argc, char **argv)
             throw std::runtime_error("Cannot read input file");
         }
     }
-    catch (const std::exception &error)
+    catch (const std::exception& error)
     {
         std::cerr << error.what() << '\n';
         return 1;
